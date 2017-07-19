@@ -2,7 +2,6 @@
  * Created by wangchao on 2017/7/19.
  */
 const Koa = require('koa');
-const router = require('koa-router')();
 
 const app = new Koa();
 
