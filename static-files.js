@@ -10,7 +10,7 @@ const fs = require('mz/fs');
  */
 function staticFiles(url, dir) {
   return async (ctx, next) => {
-    let rpath = ctx.reques.path;
+    let rpath = ctx.request.path;
     // 判断是否以指定的url开头
     if (rpath.startsWith(url)) {
       // 获取文件的完整路径
