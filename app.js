@@ -5,7 +5,7 @@ const Koa = require('koa');
 
 const app = new Koa();
 
-const templating = require('./templating');
+const temp = require('./templating');
 const controller = require('./controller');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -15,7 +15,14 @@ if (!isProduction) {
   app.use(staticFiles('/static/', __dirname + '/static'));
 }
 
-app.use(templating('view', {
+app.use(async (ctx, next) => {
+  let start = new Date();
+  await next();
+  let ms = new Date() - start;
+  console.log(`${ctx.method} ${ctx.url} - ${ms}`)
+});
+
+app.use(temp('view', {
   noCache: !isProduction,
   watch: !isProduction
 }));
